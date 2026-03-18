@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-cream text-ink antialiased;
+}
+
+@keyframes hero-sale-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-sale-image-zoom {
+  from {
+    opacity: 0.88;
+    transform: scale(1.07);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-sale-enter {
+  animation: hero-sale-fade-in 0.95s ease-out forwards;
+}
+
+.hero-sale-img {
+  animation: hero-sale-image-zoom 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Product filter dropdowns: same bg as body (cream), brown text */
+select.products-filter-select option {
+  background-color: #faf7f2;
+  color: #5c4033;
+}
+select.products-filter-select option:hover {
+  background-color: #f0ebe3;
+  color: #5c4033;
+}
