@@ -47,8 +47,8 @@ function SuccessContent() {
   if (!orderId) {
     return (
       <div className="max-w-lg mx-auto px-4 py-20 text-center">
-        <p className="text-ink/70">No order specified.</p>
-        <Link href="/products" className="text-plum underline mt-4 inline-block">
+        <p className="text-cream-muted">No order specified.</p>
+        <Link href="/products" className="text-gold hover:text-gold-light transition-colors mt-4 inline-block">
           Continue shopping
         </Link>
       </div>
@@ -58,8 +58,8 @@ function SuccessContent() {
   if (err && !order) {
     return (
       <div className="max-w-lg mx-auto px-4 py-20 text-center">
-        <p className="text-amber-800">{err}</p>
-        <Link href="/orders" className="text-plum underline mt-4 inline-block">
+        <p className="text-amber-400">{err}</p>
+        <Link href="/orders" className="text-gold hover:text-gold-light transition-colors mt-4 inline-block">
           My orders
         </Link>
       </div>
@@ -69,44 +69,44 @@ function SuccessContent() {
   if (!order) {
     return (
       <div className="max-w-lg mx-auto px-4 py-20 text-center">
-        <div className="animate-pulse text-ink/50">Loading your confirmation…</div>
+        <div className="animate-pulse text-cream-muted">Loading your confirmation…</div>
       </div>
     );
   }
 
   return (
     <div className="max-w-lg mx-auto px-4 py-16 text-center">
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 text-3xl mb-6">
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 text-3xl mb-6 ring-2 ring-emerald-500/30">
         ✓
       </div>
-      <h1 className="font-display text-3xl text-ink mb-2">Order placed</h1>
-      <p className="text-ink/70 mb-2">
-        Thank you! Your order <strong className="text-ink font-mono text-sm">{order.orderNumber}</strong> is confirmed.
+      <h1 className="font-display text-3xl text-cream mb-2">Order placed</h1>
+      <p className="text-cream-muted mb-2">
+        Thank you! Your order <strong className="text-cream font-mono text-sm">{order.orderNumber}</strong> is confirmed.
       </p>
       <p className="text-lg font-semibold text-gold mb-8">Total: ${Number(order.total).toFixed(2)}</p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
         <button
           type="button"
           onClick={() => downloadOrderPdf(order)}
-          className="inline-flex items-center justify-center px-6 py-3 border border-ink/20 rounded-lg font-medium hover:bg-white transition"
+          className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-xl font-medium text-cream hover:bg-white/10 transition-colors"
         >
           Download PDF
         </button>
         {isAuthenticated && (
           <Link
             href={`/orders/${order._id}`}
-            className="inline-flex items-center justify-center px-6 py-3 bg-ink text-cream rounded-lg font-medium hover:bg-plum transition"
+            className="btn-gold inline-flex items-center justify-center px-6 py-3"
           >
             View order & tracking
           </Link>
         )}
         <Link
           href="/orders"
-          className="inline-flex items-center justify-center px-6 py-3 border border-ink/20 rounded-lg font-medium hover:bg-cream transition"
+          className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-xl font-medium text-cream hover:bg-white/10 transition-colors"
         >
           Order history
         </Link>
-        <Link href="/products" className="inline-flex items-center justify-center text-plum underline py-3">
+        <Link href="/products" className="inline-flex items-center justify-center text-gold hover:text-gold-light transition-colors py-3">
           Continue shopping
         </Link>
       </div>
@@ -118,7 +118,7 @@ export default function CheckoutSuccessPage() {
   return (
     <Suspense
       fallback={
-        <div className="max-w-lg mx-auto px-4 py-20 text-center text-ink/50">Loading…</div>
+        <div className="max-w-lg mx-auto px-4 py-20 text-center text-cream-muted">Loading…</div>
       }
     >
       <SuccessContent />

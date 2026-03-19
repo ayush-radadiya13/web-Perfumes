@@ -28,7 +28,7 @@ export default function WishlistPage() {
 
   if (!mounted || !hydrated || !isAuthenticated) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center text-ink/50">
+      <div className="max-w-4xl mx-auto px-4 py-24 text-center text-cream-muted">
         {loading ? 'Loading your wishlist…' : 'Checking session…'}
       </div>
     );
@@ -38,14 +38,14 @@ export default function WishlistPage() {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
         <div>
-          <h1 className="font-display text-3xl md:text-4xl text-ink">Your wishlist</h1>
-          <p className="text-ink/50 mt-2 text-sm">Saved fragrances, synced across devices.</p>
+          <h1 className="font-display text-3xl md:text-4xl text-cream">Your wishlist</h1>
+          <p className="text-cream-muted mt-2 text-sm">Saved fragrances, synced across devices.</p>
         </div>
         {products.length > 0 && (
           <button
             type="button"
             onClick={() => clear()}
-            className="text-sm text-plum hover:underline transition"
+            className="text-sm text-gold hover:text-gold-light transition-colors"
           >
             Clear wishlist
           </button>
@@ -53,17 +53,17 @@ export default function WishlistPage() {
       </div>
 
       {saleAlerts.length > 0 && (
-        <div className="mb-8 p-4 rounded-lg border border-gold/40 bg-gold/5 text-sm">
-          <p className="font-medium text-ink mb-2">✨ On sale now</p>
-          <ul className="space-y-1 text-ink/80">
+        <div className="mb-8 p-4 rounded-xl glass-card border-gold/30 text-sm">
+          <p className="font-medium text-cream mb-2">✨ On sale now</p>
+          <ul className="space-y-1 text-cream/80">
             {saleAlerts.map((p) => (
               <li key={p._id}>
-                <Link href={`/products/${p.slug}`} className="text-plum hover:underline">
+                <Link href={`/products/${p.slug}`} className="text-gold hover:text-gold-light transition-colors">
                   {p.name}
                 </Link>{' '}
                 — now ${Number(p.price).toFixed(2)}
                 {p.compareAtPrice != null && (
-                  <span className="line-through text-ink/40 ml-1">
+                  <span className="line-through text-cream-muted ml-1">
                     ${Number(p.compareAtPrice).toFixed(2)}
                   </span>
                 )}
@@ -74,15 +74,12 @@ export default function WishlistPage() {
       )}
 
       {!products.length ? (
-        <div className="text-center py-20 border border-dashed border-ink/15 rounded-xl bg-cream/50">
+        <div className="text-center py-20 border border-dashed border-white/20 rounded-xl glass-card">
           <p className="text-4xl mb-4" aria-hidden>
             ♡
           </p>
-          <p className="text-ink/60 mb-6">Your wishlist is empty.</p>
-          <Link
-            href="/products"
-            className="inline-block px-8 py-3 bg-ink text-cream font-semibold rounded-sm hover:bg-plum transition"
-          >
+          <p className="text-cream-muted mb-6">Your wishlist is empty.</p>
+          <Link href="/products" className="btn-gold inline-block px-8 py-3">
             Discover perfumes
           </Link>
         </div>
@@ -91,11 +88,11 @@ export default function WishlistPage() {
           {products.map((p) => (
             <li
               key={p._id}
-              className="flex gap-4 sm:gap-6 p-4 rounded-xl border border-ink/10 bg-white shadow-sm hover:shadow-md transition-shadow"
+              className="flex gap-4 sm:gap-6 p-4 rounded-xl glass-card hover:shadow-gold-glow-sm transition-all duration-300"
             >
               <Link
                 href={`/products/${p.slug}`}
-                className="relative w-24 h-32 sm:w-28 sm:h-36 shrink-0 rounded-lg overflow-hidden bg-ink/5"
+                className="relative w-24 h-32 sm:w-28 sm:h-36 shrink-0 rounded-xl overflow-hidden bg-white/5 border border-white/5"
               >
                 {p.images?.[0] ? (
                   <Image
@@ -106,7 +103,7 @@ export default function WishlistPage() {
                     sizes="112px"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-xs text-ink/30">
+                  <div className="absolute inset-0 flex items-center justify-center text-xs text-cream-muted/50">
                     No image
                   </div>
                 )}
@@ -114,29 +111,27 @@ export default function WishlistPage() {
               <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <Link href={`/products/${p.slug}`}>
-                    <h2 className="font-display text-lg text-ink hover:text-plum transition">{p.name}</h2>
+                    <h2 className="font-display text-lg text-cream hover:text-gold transition-colors">{p.name}</h2>
                   </Link>
-                  <p className="text-xs text-plum uppercase tracking-wider mt-1">{p.category?.name}</p>
+                  <p className="text-xs text-gold/90 uppercase tracking-wider mt-1">{p.category?.name}</p>
                   <p className="mt-2 font-semibold text-gold">${Number(p.price).toFixed(2)}</p>
                   {p.stock <= 0 && (
-                    <p className="text-xs text-red-600 mt-1">Out of stock</p>
+                    <p className="text-xs text-red-400 mt-1">Out of stock</p>
                   )}
                 </div>
                 <div className="flex flex-wrap gap-2 shrink-0">
                   <button
                     type="button"
                     disabled={p.stock <= 0}
-                    onClick={() => {
-                      add(p, 1);
-                    }}
-                    className="px-4 py-2 bg-ink text-cream text-sm font-medium rounded-lg hover:bg-plum transition disabled:opacity-40 disabled:cursor-not-allowed"
+                    onClick={() => add(p, 1)}
+                    className="btn-gold px-4 py-2 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     Move to cart
                   </button>
                   <button
                     type="button"
                     onClick={() => remove(p._id)}
-                    className="px-4 py-2 border border-ink/15 text-sm rounded-lg hover:bg-ink/5 transition"
+                    className="px-4 py-2 border border-white/20 text-cream text-sm rounded-xl hover:bg-white/10 transition-colors"
                   >
                     Remove
                   </button>

@@ -52,13 +52,13 @@ export default function CheckoutPage() {
     }
   }
 
-  if (!mounted) return <div className="max-w-xl mx-auto px-4 py-16">Loading…</div>;
+  if (!mounted) return <div className="max-w-xl mx-auto px-4 py-16 text-cream-muted">Loading…</div>;
 
   if (!items.length) {
     return (
-      <div className="max-w-xl mx-auto px-4 py-16 text-center">
+      <div className="max-w-xl mx-auto px-4 py-16 text-center text-cream">
         <p>Cart is empty.</p>
-        <Link href="/products" className="text-plum underline mt-4 inline-block">
+        <Link href="/products" className="text-gold hover:text-gold-light transition-colors mt-4 inline-block">
           Shop
         </Link>
       </div>
@@ -67,20 +67,20 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-xl mx-auto px-4 py-10">
-      <h1 className="font-display text-3xl mb-2 text-ink">Checkout</h1>
-      <p className="text-sm text-ink/60 mb-8">
+      <h1 className="font-display text-3xl mb-2 text-cream">Checkout</h1>
+      <p className="text-sm text-cream-muted mb-8">
         {isAuthenticated ? (
-          <>Signed in as <strong>{user?.name}</strong>. This order will appear in your history.</>
+          <>Signed in as <strong className="text-cream">{user?.name}</strong>. This order will appear in your history.</>
         ) : (
           <>
-            <Link href="/login" className="text-plum font-medium underline">
+            <Link href="/login" className="text-gold font-medium hover:text-gold-light transition-colors">
               Sign in
             </Link>{' '}
             to save this order to your account.
           </>
         )}
       </p>
-      <p className="mb-6 text-ink/80">
+      <p className="mb-6 text-cream/90">
         Subtotal: <strong className="text-gold">${total.toFixed(2)}</strong>
       </p>
       <form onSubmit={onSubmit} className="space-y-4">
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
           required
           placeholder="Full name"
           defaultValue={user?.name || ''}
-          className="w-full border border-ink/15 rounded-lg px-4 py-3 bg-white focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition"
+          className="w-full border border-white/10 rounded-xl px-4 py-3 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:border-gold/50 outline-none transition"
         />
         <input
           name="customerEmail"
@@ -97,25 +97,25 @@ export default function CheckoutPage() {
           required
           placeholder="Email"
           defaultValue={user?.email || ''}
-          className="w-full border border-ink/15 rounded-lg px-4 py-3 bg-white focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition"
+          className="w-full border border-white/10 rounded-xl px-4 py-3 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:border-gold/50 outline-none transition"
         />
         <textarea
           name="shippingAddress"
           required
           rows={3}
           placeholder="Shipping address"
-          className="w-full border border-ink/15 rounded-lg px-4 py-3 bg-white focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition resize-none"
+          className="w-full border border-white/10 rounded-xl px-4 py-3 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:border-gold/50 outline-none transition resize-none"
         />
         <input
           name="offerCode"
           placeholder="Offer code (optional)"
-          className="w-full border border-ink/15 rounded-lg px-4 py-3 bg-white focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition"
+          className="w-full border border-white/10 rounded-xl px-4 py-3 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:border-gold/50 outline-none transition"
         />
-        {err && <p className="text-red-600 text-sm">{err}</p>}
+        {err && <p className="text-red-400 text-sm">{err}</p>}
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3.5 bg-ink text-cream font-semibold rounded-lg hover:bg-plum disabled:opacity-50 transition shadow-lg shadow-ink/10"
+          className="btn-gold w-full py-3.5"
         >
           {loading ? 'Placing order…' : 'Place order'}
         </button>

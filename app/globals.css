@@ -2,8 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-cream text-ink antialiased;
+@layer base {
+  body {
+    @apply bg-dark text-cream antialiased;
+    background-image: linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 30%, #111 70%, #0a0a0a 100%);
+    background-attachment: fixed;
+  }
+}
+
+/* Glassmorphism utility */
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/[0.06] border border-white/[0.08];
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  .glass-card {
+    @apply rounded-xl backdrop-blur-xl bg-white/[0.05] border border-white/[0.08];
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300;
+    background: linear-gradient(135deg, #d4a373 0%, #c58b2b 100%);
+    color: #0a0a0a;
+    box-shadow: 0 4px 14px rgba(197, 139, 43, 0.25);
+  }
+  .btn-gold:hover:not(:disabled) {
+    background: linear-gradient(135deg, #e8c9a8 0%, #d4a373 100%);
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.35), 0 0 40px rgba(197, 139, 43, 0.2);
+    transform: translateY(-1px);
+  }
+  .btn-gold:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
 }
 
 @keyframes hero-sale-fade-in {
@@ -36,12 +66,32 @@ body {
   animation: hero-sale-image-zoom 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* Product filter dropdowns: same bg as body (cream), brown text */
+/* Product filter dropdowns: dark theme */
+select.products-filter-select {
+  @apply bg-dark-elevated text-cream border-white/10;
+}
 select.products-filter-select option {
-  background-color: #faf7f2;
-  color: #5c4033;
+  background-color: #111;
+  color: #eaeaea;
 }
 select.products-filter-select option:hover {
-  background-color: #f0ebe3;
-  color: #5c4033;
+  background-color: #1a1a1a;
+  color: #eaeaea;
+}
+
+/* Auth pages: dark + purple accent */
+.auth-input {
+  @apply w-full rounded-lg px-4 py-3 bg-white/5 text-cream placeholder:text-cream-muted/70 border border-white/10 outline-none transition;
+}
+.auth-input:focus {
+  @apply border-purple ring-2 ring-purple/30;
+}
+.auth-btn {
+  @apply w-full py-3.5 rounded-lg font-semibold text-white bg-purple hover:bg-purple-light transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.auth-radio {
+  @apply w-4 h-4 rounded-full border-2 border-white/30 bg-white/5 text-purple focus:ring-2 focus:ring-purple/40 accent-purple;
+}
+.auth-link {
+  @apply text-purple hover:text-purple-light font-medium transition-colors;
 }

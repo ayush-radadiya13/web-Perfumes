@@ -21,17 +21,15 @@ export default function HeroSaleBanner({ product }) {
 
   return (
     <section className="relative overflow-hidden text-cream hero-sale-enter">
-      {/* Smoky luxury background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#08060b] via-[#14101c] to-[#0a080e]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_40%,rgba(76,29,74,0.35),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_90%_80%,rgba(201,162,39,0.08),transparent_50%)]" />
-      <div className="absolute inset-0 opacity-[0.07] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0f0f0f] " />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_40%,rgba(212,163,115,0.15),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_90%_80%,rgba(197,139,43,0.12),transparent_50%)]" />
+      <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')]" />
 
-      <div className="relative max-w-6xl mx-auto px-4 py-14 md:py-20 lg:py-24">
+      <div className="relative max-w-7xl mx-auto px-4 py-14 md:py-20 lg:py-24">
         <div className="flex flex-col md:grid md:grid-cols-2 md:items-center gap-10 md:gap-14 lg:gap-16">
-          {/* Image — top on mobile, right on desktop */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] hero-sale-img rounded-sm overflow-hidden shadow-[0_25px_80px_-20px_rgba(0,0,0,0.7)] ring-1 ring-gold/20">
+            <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[5/6] hero-sale-img rounded-none overflow-hidden shadow-gold-glow ring-1 ring-gold/30 border border-white/10">
               {src ? (
                 <Image
                   src={src}
@@ -42,16 +40,15 @@ export default function HeroSaleBanner({ product }) {
                   priority
                 />
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-b from-plum/40 to-ink flex items-center justify-center text-cream/40 text-sm tracking-widest uppercase">
+                <div className="absolute inset-0 bg-gradient-to-b from-gold/20 to-[#111] flex items-center justify-center text-cream-muted text-sm tracking-widest uppercase">
                   {product.name}
                 </div>
               )}
             </div>
           </div>
 
-          {/* Copy — below on mobile, left on desktop */}
           <div className="order-2 md:order-1 text-center md:text-left">
-            <p className="text-gold/90 text-xs sm:text-sm tracking-[0.35em] uppercase mb-4 font-medium">
+            <p className="text-gold text-xs sm:text-sm tracking-[0.35em] uppercase mb-4 font-medium">
               Limited offer
             </p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-tight text-cream">
@@ -60,23 +57,20 @@ export default function HeroSaleBanner({ product }) {
             <p className="mt-5 text-2xl sm:text-3xl md:text-4xl font-display text-gold">
               Up to {product.discountPercentage}% OFF
             </p>
-            <p className="mt-6 text-cream/65 text-sm sm:text-base max-w-xl mx-auto md:mx-0 leading-relaxed">
+            <p className="mt-6 text-cream-muted text-sm sm:text-base max-w-xl mx-auto md:mx-0 leading-relaxed">
               Discover an exquisite collection of premium perfumes at unbelievable prices during our
               exclusive sale!
             </p>
-            <p className="mt-4 text-cream/50 text-sm">
+            <p className="mt-4 text-cream-muted text-sm">
               <span className="line-through text-cream/40 mr-2">
                 ${Number(product.price).toFixed(2)}
               </span>
               <span className="text-gold font-semibold text-lg">
                 ${Number(product.finalPrice).toFixed(2)}
               </span>
-              <span className="ml-2 text-cream/45">· {product.name}</span>
+              <span className="ml-2 text-cream/60">· {product.name}</span>
             </p>
-            <Link
-              href={href}
-              className="inline-block mt-10 px-10 py-3.5 bg-gold text-ink font-semibold text-sm tracking-wide rounded-sm hover:bg-[#d4ad32] transition-colors duration-300 shadow-lg shadow-black/40"
-            >
+            <Link href={href} className="btn-gold inline-block mt-10 px-10 py-3.5 text-sm">
               Know More
             </Link>
           </div>

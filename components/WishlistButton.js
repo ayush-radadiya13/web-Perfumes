@@ -41,11 +41,11 @@ export default function WishlistButton({ productId, className = '' }) {
       title={active ? 'Remove from wishlist' : 'Add to wishlist'}
       aria-label={active ? 'Remove from wishlist' : 'Add to wishlist'}
       className={`
-        flex h-10 w-10 items-center justify-center rounded-full
-        bg-cream/90 text-lg shadow-md backdrop-blur-sm
-        border border-ink/10 transition-all duration-200
-        hover:bg-white hover:border-plum/30 hover:shadow-lg
+        flex h-10 w-10 items-center justify-center rounded-full text-lg
+        backdrop-blur-xl bg-white/10 border border-white/20
+        transition-all duration-200 hover:border-gold/40 hover:shadow-gold-glow-sm
         disabled:opacity-60
+        ${active ? 'text-red-400 border-red-400/30' : 'text-cream/90'}
         ${animating ? 'scale-125' : 'scale-100'}
         ${className}
       `}

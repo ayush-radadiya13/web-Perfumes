@@ -17,9 +17,9 @@ export default async function CollectionsPage() {
   } catch {}
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
-      <h1 className="font-display text-3xl mb-10">Collections</h1>
-      <div className="grid sm:grid-cols-3 gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-16">
+      <h1 className="font-display text-3xl md:text-4xl text-cream mb-10">Collections</h1>
+      <div className="grid sm:grid-cols-4 gap-8">
         {collections.map((c) => {
           const src = collectionImageSrc(c.image);
           const extras = (c.previewImages || [])
@@ -30,26 +30,26 @@ export default async function CollectionsPage() {
             <Link
               key={c._id}
               href={`/products?collection=${c._id}`}
-              className="group block rounded-xl overflow-hidden border border-ink/10 bg-ink shadow-sm hover:shadow-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2"
+              className="group block rounded-xl overflow-hidden glass-card hover:shadow-gold-glow-sm transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
             >
-              <div className="relative bg-ink/20">
+              <div className="relative bg-white/5">
                 <div className="relative aspect-[3/3]">
                   {src ? (
                     <Image
                       src={src}
                       alt={c.name}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, 50vw"
                       unoptimized
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-plum/40 via-ink/30 to-gold/20 p-6">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gold/20 via-white/5 to-plum/20 p-6">
                       <span className="font-display text-2xl text-cream text-center">{c.name}</span>
                     </div>
                   )}
                   {src && (
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   )}
                   {src && (
                     <span className="absolute bottom-3 left-3 right-3 font-display text-xl text-cream drop-shadow-md">
@@ -78,12 +78,12 @@ export default async function CollectionsPage() {
                 {/*)}*/}
               </div>
               {(c.featured || c.description) && (
-                <div className="p-6 bg-ink text-cream">
+                <div className="p-6 bg-white/5 border-t border-white/10 text-cream">
                   {c.featured && (
                     <span className="text-gold text-xs uppercase tracking-widest">Featured</span>
                   )}
                   {c.description && (
-                    <p className={`text-cream/70 text-sm ${c.featured ? 'mt-2' : ''}`}>
+                    <p className={`text-cream-muted text-sm ${c.featured ? 'mt-2' : ''}`}>
                       {c.description}
                     </p>
                   )}
@@ -94,7 +94,7 @@ export default async function CollectionsPage() {
         })}
       </div>
       {!collections.length && (
-        <p className="text-center text-ink/50 py-12">No collections yet.</p>
+        <p className="text-center text-cream-muted py-12">No collections yet.</p>
       )}
     </div>
   );

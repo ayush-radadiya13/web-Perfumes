@@ -37,22 +37,36 @@ export default function ReviewForm({ productId }) {
         name="customerName"
         required
         placeholder="Your name"
-        className="w-full border rounded px-3 py-2"
+        className="w-full border border-white/10 rounded-xl px-3 py-2.5 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:outline-none"
       />
-      <input name="customerEmail" type="email" placeholder="Email (optional)" className="w-full border rounded px-3 py-2" />
-      <select name="rating" required className="w-full border rounded px-3 py-2">
+      <input
+        name="customerEmail"
+        type="email"
+        placeholder="Email (optional)"
+        className="w-full border border-white/10 rounded-xl px-3 py-2.5 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:outline-none"
+      />
+      <select
+        name="rating"
+        required
+        className="w-full border border-white/10 rounded-xl px-3 py-2.5 bg-white/5 text-cream focus:ring-2 focus:ring-gold/40 focus:outline-none"
+      >
         {[5, 4, 3, 2, 1].map((n) => (
           <option key={n} value={n}>
             {n} stars
           </option>
         ))}
       </select>
-      <textarea name="comment" rows={3} placeholder="Comment" className="w-full border rounded px-3 py-2" />
-      {err && <p className="text-sm text-red-600">{err}</p>}
+      <textarea
+        name="comment"
+        rows={3}
+        placeholder="Comment"
+        className="w-full border border-white/10 rounded-xl px-3 py-2.5 bg-white/5 text-cream placeholder:text-cream-muted focus:ring-2 focus:ring-gold/40 focus:outline-none resize-none"
+      />
+      {err && <p className="text-sm text-red-400">{err}</p>}
       <button
         type="submit"
         disabled={loading}
-        className="px-6 py-2 bg-plum text-cream rounded disabled:opacity-50"
+        className="btn-gold px-6 py-2.5 disabled:opacity-50"
       >
         {loading ? 'Sending…' : 'Submit review'}
       </button>

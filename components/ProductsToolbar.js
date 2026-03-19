@@ -41,11 +41,11 @@ export default function ProductsToolbar({ categories = [], collections = [] }) {
           key={`q-${currentSearch}`}
           defaultValue={currentSearch}
           placeholder="Search perfumes..."
-          className="flex-1 min-w-0 border border-brown rounded px-4 py-2 bg-cream text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-brown/30"
+          className="flex-1 min-w-0 border border-white/10 rounded-xl px-4 py-2.5 bg-white/5 text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold/50 transition"
         />
         <button
           type="submit"
-          className="px-5 py-2 bg-brown text-cream rounded font-medium hover:bg-brown-dark transition-colors shrink-0"
+          className="btn-gold px-5 py-2.5 shrink-0"
         >
           Search
         </button>
@@ -57,7 +57,7 @@ export default function ProductsToolbar({ categories = [], collections = [] }) {
           value={currentCategory}
           onChange={handleCategoryChange}
           aria-label="Category filter"
-          className="products-filter-select border border-brown rounded-lg bg-cream text-brown px-3 py-2 min-w-[160px] focus:outline-none focus:ring-2 focus:ring-brown/30"
+          className="products-filter-select border border-white/10 rounded-xl px-3 py-2.5 min-w-[160px] focus:outline-none focus:ring-2 focus:ring-gold/40"
         >
           <option value="">Category</option>
           {categories.map((c) => (
