@@ -23,7 +23,9 @@ function RegisterPage() {
     setErr('');
     setLoading(true);
     try {
-      await register(name, form.email.value, form.password.value);
+      const genderInput = form.querySelector('input[name="gender"]:checked');
+      const gender = genderInput?.value;
+      await register(name, form.email.value, form.password.value, gender);
       router.push('/');
     } catch (er) {
       setErr(er.message || 'Registration failed');

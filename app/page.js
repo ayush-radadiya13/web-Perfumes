@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getProducts, getCategories, getHeroSale, getMostWishlisted, BASE } from '../lib/api';
+import { getProducts, getCategories, getHeroSale, getMostWishlisted, getStorefrontOffers, BASE } from '../lib/api';
 import ProductCard from '../components/ProductCard';
 import HeroSaleBanner from '../components/HeroSaleBanner';
+import StorefrontOffers from '../components/StorefrontOffers';
 
 function categoryImageSrc(image) {
   if (!image || typeof image !== 'string') return '';
@@ -17,17 +18,20 @@ export default async function HomePage() {
   let categories = [];
   let heroProduct = null;
   let mostWishlisted = [];
+  let storefrontOffers = [];
   try {
-    const [f, c, heroRes, mw] = await Promise.all([
+    const [f, c, heroRes, mw, offRes] = await Promise.all([
       getProducts({ limit: 8 }),
       getCategories(),
       getHeroSale(),
       getMostWishlisted({ limit: 4 }).catch(() => ({ products: [] })),
+      getStorefrontOffers().catch(() => ({ offers: [] })),
     ]);
     featured = f;
     categories = c;
     heroProduct = heroRes?.product ?? null;
     mostWishlisted = mw?.products || [];
+    storefrontOffers = offRes?.offers || [];
   } catch {
     /* API down */
   }
@@ -162,6 +166,8 @@ export default async function HomePage() {
       {/*    </p>*/}
       {/*  )}*/}
       {/*</section>*/}
+
+      <StorefrontOffers offers={storefrontOffers} />
 
       {mostWishlisted.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 py-20 border-t border-white/10 bg-[#0d0d0d]/50">

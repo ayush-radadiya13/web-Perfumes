@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { BASE } from '../lib/api';
+import { formatINR } from '../lib/currency';
 
 function imgUrl(src) {
   if (!src) return '';
@@ -63,10 +64,10 @@ export default function HeroSaleBanner({ product }) {
             </p>
             <p className="mt-4 text-cream-muted text-sm">
               <span className="line-through text-cream/40 mr-2">
-                ${Number(product.price).toFixed(2)}
+                {formatINR(product.price)}
               </span>
               <span className="text-gold font-semibold text-lg">
-                ${Number(product.finalPrice).toFixed(2)}
+                {formatINR(product.finalPrice)}
               </span>
               <span className="ml-2 text-cream/60">· {product.name}</span>
             </p>

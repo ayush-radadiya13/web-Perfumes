@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { BASE } from '../lib/api';
+import { formatINR } from '../lib/currency';
 import WishlistButton from './WishlistButton';
 
 function imgUrl(src) {
@@ -34,7 +35,7 @@ export default function ProductCard({ product }) {
       <Link href={href} className="block p-4">
         <p className="text-xs text-gold/90 uppercase tracking-wider">{product.category?.name}</p>
         <h3 className="font-display text-lg mt-1 text-cream group-hover:text-gold transition-colors duration-200">{product.name}</h3>
-        <p className="mt-2 font-semibold text-gold">${Number(product.price).toFixed(2)}</p>
+        <p className="mt-2 font-semibold text-gold">{formatINR(product.price)}</p>
       </Link>
     </div>
   );

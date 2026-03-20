@@ -8,6 +8,7 @@ import OrderTrackingBar from '../../../components/OrderTrackingBar';
 import { getOrderById } from '../../../lib/api';
 import { orderStatusLabel } from '../../../lib/orderStatus';
 import { downloadOrderPdf } from '../../../lib/orderPdf';
+import { formatINR } from '../../../lib/currency';
 
 export default function OrderDetailPage() {
   const { id } = useParams();
@@ -84,6 +85,15 @@ export default function OrderDetailPage() {
               ? new Date(order.createdAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })
               : ''}
           </p>
+          {order.paymentStatus ? (
+            <p className="text-sm text-cream-muted mt-2">
+              Payment:{' '}
+              <span className="text-cream capitalize">{order.paymentStatus}</span>
+              {order.transactionId ? (
+                <span className="block font-mono text-xs text-cream/70 mt-1">{order.transactionId}</span>
+              ) : null}
+            </p>
+          ) : null}
         </div>
         <span
           className={`inline-flex self-start px-4 py-1.5 rounded-full text-sm font-semibold ${
@@ -123,12 +133,12 @@ export default function OrderDetailPage() {
             <li key={i} className="flex justify-between gap-4 py-4 first:pt-0">
               <div>
                 <p className="font-medium text-cream">{line.name}</p>
-                <p className="text-sm text-cream-muted">${Number(line.price).toFixed(2)} each</p>
+                <p className="text-sm text-cream-muted">{formatINR(line.price)} each</p>
               </div>
               <div className="text-right shrink-0">
                 <p className="text-sm text-cream/70">× {line.quantity}</p>
                 <p className="font-semibold text-cream">
-                  ${(Number(line.price) * line.quantity).toFixed(2)}
+                  {formatINR(Number(line.price) * line.quantity)}
                 </p>
               </div>
             </li>
@@ -138,17 +148,17 @@ export default function OrderDetailPage() {
         <div className="mt-6 pt-6 border-t border-white/10 space-y-2 text-sm">
           <div className="flex justify-between text-cream-muted">
             <span>Subtotal</span>
-            <span>${Number(order.subtotal).toFixed(2)}</span>
+            <span>{formatINR(order.subtotal)}</span>
           </div>
           {order.discount > 0 && (
             <div className="flex justify-between text-emerald-400">
               <span>Discount</span>
-              <span>-${Number(order.discount).toFixed(2)}</span>
+              <span>{formatINR(-Number(order.discount))}</span>
             </div>
           )}
           <div className="flex justify-between text-lg font-bold text-cream pt-2">
             <span>Total</span>
-            <span className="text-gold">${Number(order.total).toFixed(2)}</span>
+            <span className="text-gold">{formatINR(order.total)}</span>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { API, imageUrl } from "@/lib/api";
+import { formatINR } from "@/lib/currency";
 import AddToCart from "./AddToCart";
 
 async function getProduct(slug) {
@@ -40,7 +41,7 @@ export default async function ProductPage({ params }) {
           <p className="text-sm text-amber-600">{cat}</p>
           <h1 className="mt-2 font-serif text-3xl text-stone-100 sm:text-4xl">{p.name}</h1>
           {col && <p className="mt-1 text-sm text-stone-500">Collection: {col}</p>}
-          <p className="mt-4 text-2xl text-amber-500">${Number(p.price).toFixed(2)}</p>
+          <p className="mt-4 text-2xl text-amber-500">{formatINR(p.price)}</p>
           {p.ratingCount > 0 && (
             <p className="mt-2 text-stone-400">
               ★ {Number(p.rating).toFixed(1)} <span className="text-stone-600">({p.ratingCount} reviews)</span>

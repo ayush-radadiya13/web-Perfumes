@@ -2,9 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '../../components/AuthProvider';
 import { getMyOrders } from '../../lib/api';
 import { orderStatusLabel } from '../../lib/orderStatus';
+import { formatINR } from '../../lib/currency';
+import { BASE } from '../../lib/api';
+
+function imgUrl(src) {
+  if (!src) return '';
+  if (src.startsWith('http')) return src;
+  return `${BASE}${src.startsWith('/') ? '' : '/'}${src}`;
+}
 
 export default function OrdersPage() {
   const { token, isAuthenticated, mounted } = useAuth();
@@ -78,8 +87,14 @@ export default function OrdersPage() {
             className="rounded-2xl glass-card overflow-hidden hover:shadow-gold-glow-sm hover:border-gold/30 transition-all duration-300"
           >
             <Link href={`/orders/${o._id}`} className="block p-6 md:p-8">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div>
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-6">
+                <div className="flex items-start gap-4 md:gap-5 min-w-0">
+                  <div className="w-16 h-20 md:w-20 md:h-24 relative bg-white/5 rounded-xl overflow-hidden shrink-0 border border-white/5">
+                    {o.items?.[0]?.image ? (
+                      <Image src={imgUrl(o.items[0].image)} alt={o.items[0].name || 'Ordered product'} fill className="object-cover" sizes="80px" />
+                    ) : null}
+                  </div>
+                  <div className="min-w-0">
                   <p className="font-mono text-sm text-gold font-semibold">{o.orderNumber}</p>
                   <p className="text-xs text-cream-muted mt-1">
                     {o.createdAt ? new Date(o.createdAt).toLocaleDateString(undefined, {
@@ -96,6 +111,7 @@ export default function OrdersPage() {
                       <li className="text-xs text-cream-muted">+{(o.items || []).length - 4} more</li>
                     )}
                   </ul>
+                  </div>
                 </div>
                 <div className="md:text-right shrink-0">
                   <span
@@ -111,7 +127,7 @@ export default function OrdersPage() {
                   >
                     {orderStatusLabel(o.status)}
                   </span>
-                  <p className="mt-4 text-xl font-display text-cream">${Number(o.total).toFixed(2)}</p>
+                  <p className="mt-4 text-xl font-display text-cream">{formatINR(o.total)}</p>
                   <span className="text-sm text-gold font-medium mt-2 inline-block">View details →</span>
                 </div>
               </div>

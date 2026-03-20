@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../components/CartProvider';
 import { BASE } from '../../lib/api';
+import { formatINR } from '../../lib/currency';
 
 function imgUrl(src) {
   if (!src) return '';
@@ -42,7 +43,7 @@ export default function CartPage() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium text-cream truncate">{line.name}</p>
-              <p className="text-gold">${Number(line.price).toFixed(2)}</p>
+              <p className="text-gold">{formatINR(line.price)}</p>
             </div>
             <input
               type="number"
@@ -62,7 +63,7 @@ export default function CartPage() {
         ))}
       </ul>
       <div className="mt-10 flex justify-between items-center">
-        <p className="text-xl font-semibold text-cream">Total: <span className="text-gold">${total.toFixed(2)}</span></p>
+        <p className="text-xl font-semibold text-cream">Total: <span className="text-gold">{formatINR(total)}</span></p>
         <Link href="/checkout" className="btn-gold px-8 py-3">
           Checkout
         </Link>

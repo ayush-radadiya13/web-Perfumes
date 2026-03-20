@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '../../components/CartProvider';
 import { useAuth } from '../../components/AuthProvider';
 import { createOrder } from '../../lib/api';
+import { formatINR } from '../../lib/currency';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -31,11 +32,14 @@ export default function CheckoutPage() {
         token || null
       );
       const order = res.order;
+      const paymentToken = res.paymentToken;
+      if (!order?._id || !paymentToken) {
+        throw new Error('Could not start payment');
+      }
       try {
         sessionStorage.setItem(
-          'lastOrder',
+          `checkout_${order._id}`,
           JSON.stringify({
-            ...order,
             customerName: fd.get('customerName'),
             shippingAddress: fd.get('shippingAddress'),
           })
@@ -43,8 +47,7 @@ export default function CheckoutPage() {
       } catch {
         /* ignore */
       }
-      clear();
-      router.push(`/checkout/success?orderId=${order._id}`);
+      router.push(`/checkout/pay/${order._id}?token=${encodeURIComponent(paymentToken)}`);
     } catch (er) {
       setErr(er.message || 'Checkout failed');
     } finally {
@@ -81,7 +84,7 @@ export default function CheckoutPage() {
         )}
       </p>
       <p className="mb-6 text-cream/90">
-        Subtotal: <strong className="text-gold">${total.toFixed(2)}</strong>
+        Subtotal: <strong className="text-gold">{formatINR(total)}</strong>
       </p>
       <form onSubmit={onSubmit} className="space-y-4">
         <input

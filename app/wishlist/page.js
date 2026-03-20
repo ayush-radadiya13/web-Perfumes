@@ -8,6 +8,7 @@ import { useAuth } from '../../components/AuthProvider';
 import { useWishlist } from '../../components/WishlistProvider';
 import { useCart } from '../../components/CartProvider';
 import { BASE } from '../../lib/api';
+import { formatINR } from '../../lib/currency';
 
 function imgUrl(src) {
   if (!src) return '/placeholder.jpg';
@@ -61,10 +62,10 @@ export default function WishlistPage() {
                 <Link href={`/products/${p.slug}`} className="text-gold hover:text-gold-light transition-colors">
                   {p.name}
                 </Link>{' '}
-                — now ${Number(p.price).toFixed(2)}
+                — now {formatINR(p.price)}
                 {p.compareAtPrice != null && (
                   <span className="line-through text-cream-muted ml-1">
-                    ${Number(p.compareAtPrice).toFixed(2)}
+                    {formatINR(p.compareAtPrice)}
                   </span>
                 )}
               </li>
@@ -114,7 +115,7 @@ export default function WishlistPage() {
                     <h2 className="font-display text-lg text-cream hover:text-gold transition-colors">{p.name}</h2>
                   </Link>
                   <p className="text-xs text-gold/90 uppercase tracking-wider mt-1">{p.category?.name}</p>
-                  <p className="mt-2 font-semibold text-gold">${Number(p.price).toFixed(2)}</p>
+                  <p className="mt-2 font-semibold text-gold">{formatINR(p.price)}</p>
                   {p.stock <= 0 && (
                     <p className="text-xs text-red-400 mt-1">Out of stock</p>
                   )}

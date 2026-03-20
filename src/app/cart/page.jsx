@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { imageUrl } from "@/lib/api";
+import { formatINR } from "@/lib/currency";
 
 export default function CartPage() {
   const { items, remove, setQty, total, clear } = useCart();
@@ -38,7 +39,7 @@ export default function CartPage() {
               <Link href={`/product/${line.productId}`} className="font-medium text-stone-200 hover:text-amber-400">
                 {line.name}
               </Link>
-              <p className="text-amber-500">${line.price.toFixed(2)}</p>
+              <p className="text-amber-500">{formatINR(line.price)}</p>
               <div className="mt-2 flex items-center gap-2">
                 <input
                   type="number"
@@ -61,7 +62,7 @@ export default function CartPage() {
           Clear cart
         </button>
         <p className="text-xl text-stone-100">
-          Total: <span className="text-amber-500">${total.toFixed(2)}</span>
+          Total: <span className="text-amber-500">{formatINR(total)}</span>
         </p>
       </div>
       <Link

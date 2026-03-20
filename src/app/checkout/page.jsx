@@ -6,6 +6,7 @@ import { API, authHeaders } from "@/lib/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { formatINR } from "@/lib/currency";
 
 const formKeys = ["fullName", "line1", "city", "postalCode", "country"];
 
@@ -77,7 +78,7 @@ export default function CheckoutPage() {
   return (
     <div className="mx-auto max-w-lg px-4 py-10 sm:px-6">
       <h1 className="font-serif text-3xl text-stone-100">Checkout</h1>
-      <p className="mt-2 text-stone-500">Total: ${total.toFixed(2)}</p>
+      <p className="mt-2 text-stone-500">Total: {formatINR(total)}</p>
       <form onSubmit={submit} className="mt-8 space-y-4">
         {formKeys.map((k) => (
           <div key={k}>

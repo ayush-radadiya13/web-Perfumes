@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useAuth } from '../../../components/AuthProvider';
 import { getOrderById } from '../../../lib/api';
 import { downloadOrderPdf } from '../../../lib/orderPdf';
+import { formatINR } from '../../../lib/currency';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -74,16 +75,45 @@ function SuccessContent() {
     );
   }
 
+  if (order.paymentStatus === 'failed') {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-16 text-center">
+        <p className="text-red-400/90 mb-2">This order was not paid.</p>
+        <p className="text-sm text-cream-muted mb-6 font-mono">{order.orderNumber}</p>
+        <Link href="/checkout" className="btn-gold inline-flex items-center justify-center px-6 py-3">
+          Return to checkout
+        </Link>
+      </div>
+    );
+  }
+
+  const paid = order.paymentStatus === 'paid' || order.paymentStatus === undefined;
+  if (!paid) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-20 text-center">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-gold/40 border-t-gold animate-spin mx-auto mb-6" />
+        <p className="text-cream-muted mb-2">Waiting for payment confirmation…</p>
+        <p className="text-xs font-mono text-cream/50">{order.orderNumber}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-lg mx-auto px-4 py-16 text-center">
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 text-3xl mb-6 ring-2 ring-emerald-500/30">
         ✓
       </div>
-      <h1 className="font-display text-3xl text-cream mb-2">Order placed</h1>
+      <h1 className="font-display text-3xl text-cream mb-2">Order confirmed</h1>
       <p className="text-cream-muted mb-2">
-        Thank you! Your order <strong className="text-cream font-mono text-sm">{order.orderNumber}</strong> is confirmed.
+        Thank you! Your order <strong className="text-cream font-mono text-sm">{order.orderNumber}</strong> is paid and
+        confirmed.
       </p>
-      <p className="text-lg font-semibold text-gold mb-8">Total: ${Number(order.total).toFixed(2)}</p>
+      {order.transactionId ? (
+        <p className="text-xs font-mono text-cream/60 mb-2">
+          Transaction <span className="text-cream/80">{order.transactionId}</span>
+        </p>
+      ) : null}
+      <p className="text-lg font-semibold text-gold mb-8">Total: {formatINR(order.total)}</p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
         <button
           type="button"

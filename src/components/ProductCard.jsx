@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { imageUrl } from "@/lib/api";
+import { formatINR } from "@/lib/currency";
 
 export function ProductCard({ p }) {
   const src = imageUrl(p.images?.[0]);
@@ -26,7 +27,7 @@ export function ProductCard({ p }) {
       </div>
       <div className="p-4">
         <h3 className="font-medium text-stone-100 line-clamp-1">{p.name}</h3>
-        <p className="mt-1 text-amber-500">${p.price.toFixed(2)}</p>
+        <p className="mt-1 text-amber-500">{formatINR(p.price)}</p>
         {p.rating != null && p.rating > 0 && (
           <p className="mt-1 text-xs text-stone-500">★ {p.rating.toFixed(1)}</p>
         )}

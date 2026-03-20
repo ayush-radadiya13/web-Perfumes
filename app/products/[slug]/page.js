@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProductBySlug, getReviews, BASE } from '../../../lib/api';
+import { formatINR } from '../../../lib/currency';
 import AddToCart from '../../../components/AddToCart';
 import ProductWishlistRow from '../../../components/ProductWishlistRow';
 import ReviewForm from '../../../components/ReviewForm';
@@ -44,7 +45,7 @@ export default async function ProductPage({ params }) {
         <div>
           <p className="text-gold/90 text-sm uppercase tracking-wider">{product.category?.name}</p>
           <h1 className="font-display text-4xl mt-2 text-cream">{product.name}</h1>
-          <p className="text-3xl font-semibold text-gold mt-4">${Number(product.price).toFixed(2)}</p>
+          <p className="text-3xl font-semibold text-gold mt-4">{formatINR(product.price)}</p>
           {product.volumeMl && (
             <p className="text-sm text-cream-muted mt-1">{product.volumeMl} ml</p>
           )}

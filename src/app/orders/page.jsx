@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { API, authHeaders } from "@/lib/api";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { formatINR } from "@/lib/currency";
 
 export default function OrdersPage() {
   const { user, token } = useAuth();
@@ -47,7 +48,7 @@ export default function OrdersPage() {
             <ul className="mt-4 text-sm text-stone-400">
               {o.items.map((i, idx) => (
                 <li key={idx}>
-                  {i.name} × {i.quantity} @ ${i.price}
+                  {i.name} × {i.quantity} @ {formatINR(i.price)}
                 </li>
               ))}
             </ul>
