@@ -18,7 +18,10 @@ export default async function CollectionsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
-      <h1 className="font-display text-3xl md:text-4xl text-cream mb-10">Collections</h1>
+      <h1 className="font-display text-3xl md:text-4xl text-cream mb-4">Collections</h1>
+        <p className="text-gold mb-10 max-w-xl">
+            Crafted for elegance, explore our signature collections
+        </p>
       <div className="grid sm:grid-cols-4 gap-8">
         {collections.map((c) => {
           const src = collectionImageSrc(c.image);

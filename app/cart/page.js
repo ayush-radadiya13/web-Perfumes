@@ -32,7 +32,11 @@ export default function CartPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="font-display text-3xl text-cream mb-8">Cart</h1>
+      <h1 className="font-display text-3xl text-cream mb-4">Cart</h1>
+        <p className="text-gold mb-10 max-w-xl">
+            Add this luxurious scent to your cart and feel the elegance
+        </p>
+
       <ul className="space-y-6">
         {items.map((line) => (
           <li key={line.productId} className="flex gap-4 items-center border-b border-white/10 pb-6">

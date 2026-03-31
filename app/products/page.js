@@ -31,7 +31,7 @@ export default async function ProductsPage({ searchParams }) {
 
       <ProductsToolbar categories={categories} collections={collections} />
 
-      <div className="grid grid-cols-4 md:grid-cols-6 gap-6">
+      <div className="grid grid-cols-4 md:grid-cols-4 gap-6">
         {data.items?.map((p) => (
           <ProductCard key={p._id} product={p} />
         ))}
