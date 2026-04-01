@@ -28,16 +28,16 @@ export default function HeroSaleBanner({ product }) {
       <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')]" />
 
       <div className="relative max-w-7xl mx-auto px-4 py-14 md:py-20 lg:py-24">
-        <div className="flex flex-col md:grid md:grid-cols-2 md:items-center gap-10 md:gap-14 lg:gap-16">
-          <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[5/6] hero-sale-img rounded-none overflow-hidden shadow-gold-glow ring-1 ring-gold/30 border border-white/10">
+        <div className="flex flex-col md:grid md:grid-cols-2 md:items-center gap-10 md:gap-12 lg:gap-14">
+          <div className="order-1 md:order-2 flex items-center justify-center md:justify-end">
+            <div className="relative w-full max-w-[300px] sm:max-w-[340px] md:max-w-md h-[400px] sm:h-[410px] md:h-[420px] max-h-[420px] flex items-center justify-center p-4 hero-sale-img rounded-none overflow-hidden bg-[#0a0a0a]/60 shadow-gold-glow-sm ring-1 ring-gold/20 border border-white/10">
               {src ? (
                 <Image
                   src={src}
                   alt={product.name}
                   fill
-                  className="object-cover object-center"
-                  sizes="(max-width:768px) 280px, 420px"
+                  className="object-contain object-center max-h-full"
+                  sizes="(max-width: 640px) 300px, (max-width: 768px) 340px, 380px"
                   priority
                 />
               ) : (

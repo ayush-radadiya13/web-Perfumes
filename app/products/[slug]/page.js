@@ -34,13 +34,24 @@ export default async function ProductPage({ params }) {
         ← Back to shop
       </Link>
 
-      <div className="grid md:grid-cols-2 gap-12">
-        <div className="aspect-[3/4] relative bg-white/5 rounded-xl overflow-hidden glass-card">
-          {main ? (
-            <Image src={imgUrl(main)} alt={product.name} fill className="object-cover" priority sizes="50vw" />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-cream-muted/50">No image</div>
-          )}
+      <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
+        <div className="flex justify-center md:justify-start">
+          <div className="relative w-full max-w-lg md:max-w-md h-[420px] md:h-[400px] max-h-[420px] rounded-xl overflow-hidden bg-white/5 glass-card p-4 flex items-center justify-center">
+            {main ? (
+              <Image
+                src={imgUrl(main)}
+                alt={product.name}
+                fill
+                className="object-contain object-center"
+                priority
+                sizes="(max-width: 768px) 90vw, 380px"
+              />
+            ) : (
+              <div className="relative z-10 flex h-full min-h-[200px] w-full items-center justify-center text-cream-muted/50">
+                No image
+              </div>
+            )}
+          </div>
         </div>
         <div>
           <p className="text-gold/90 text-sm uppercase tracking-wider">{product.category?.name}</p>
